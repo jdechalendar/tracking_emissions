@@ -1,8 +1,8 @@
 # Tracking emissions in the US electricity system
-This repository contains the code to reproduce the results in the paper: [ADD REF]
+This repository contains the code to reproduce the results in the paper: [ADD REF on publication].
 
 # Setup
-This has only been tested on Linux/OSX. Adjustments may be needed to run on Windows.
+Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to run on Windows.
 * The code was developped using python 3.5, and may not work with prior versions.
 * Clone or download this repository to your machine.
 * Set the following environment variables (for example by editing your `.bashrc` file):
@@ -10,9 +10,9 @@ This has only been tested on Linux/OSX. Adjustments may be needed to run on Wind
     * `DATA_PATH`: the path where you will save data.
     * `FIGURE_PATH`: the path where you will create figures.
 * Data download:
-    * AMPD: we provide a script in the `src` folder to do this
-    * IEA EBA data: available here. [Add link]
-    * eGRID data: available here. [Add link]
+    * AMPD: We download from the EPA ftp server. We provide a script in the `src` folder to do this (`scrapeAMPD.sh`).
+    * IEA EBA data: [available here](https://www.eia.gov/opendata/bulkfiles.php).
+    * eGRID data: [available here](https://www.epa.gov/energy/emissions-generation-resource-integrated-database-egrid)
 
 # Usage
 ## Generating the dataset
