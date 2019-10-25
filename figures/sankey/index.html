@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>SANKEY Experiment</title>
+<style>
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  /* text-shadow: 0 1px 0 #fff; */
+  font: 14px Helvetica;
+}
+
+.link {
+  fill: none;
+/*
+  stroke: #000;*/
+  stroke-opacity: .3;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}
+
+table {
+   font: 18px Helvetica;
+   margin-left: 10px;
+}
+p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+</style>
+<body>
+
+<table style="width:300px">
+<tr id="charttitle">
+</tr>
+</table>
+<p id="chart">
+
+<script src="lib/d3/d3.min.js"></script>
+<script src="sankey.js"></script>
+<script>
+var gstate = [];
+
+
+var margin = {top: 10, right: 10, bottom: 10, left: 10},
+    width = 320 - margin.left - margin.right,
+    height = 540 - margin.top - margin.bottom;
+
+var formatName = function(name){ return name.split(" ")[0]; }
+
+var buttonDiv = d3.select("body").append("div")
+options = ["CO2", "SO2", "NOX"];
+var dropdown = buttonDiv.append("select")
+  .on("change", function() { drawSankey(
+    "data/data_"+d3.select(this).property('value')+".json"); });
+dropdown.selectAll("option")
+    .data(options)
+  .enter().append("option")
+    .attr("value", function(d) {return d;})
+    .text(function(d) {return d;});
+
+
+// append the svg canvas to the page
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+var sankeyg = svg.append('g');
+
+
+// Set the sankey diagram properties
+var sankey = d3.sankey()
+    .nodeWidth(25)
+    .nodePadding(10)
+    .size([width, height]);
+
+var path = sankey.link();
+
+// load the data
+function drawSankey(fileNm) {
+d3.json(fileNm).then(function(graph) {
+  var nodeMap = {};
+  graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
+  graph.links = graph.links.map(function(x) {
+   // color(formatName(x.target).replace(/ .*/, "")); // initialize the colorcycle
+    return {
+      source: nodeMap[x.source],
+      target: nodeMap[x.target],
+      value: x.value
+    };
+  });
+  gstate.graph = graph;
+  var units = graph.units;
+  var formatNumber = d3.format(",.0f"),
+      format = function(d) { return d3.format(",.2f")(d) + " " + units; };
+
+  
+  console.log(graph.totalD);
+  document.getElementById("charttitle").innerHTML = (
+    `<td>${graph.var} Production (${formatNumber(graph.totalG)} ${units})</td>
+     <td align="right">${graph.var} Consumption (${formatNumber(graph.totalD)} ${units})</td>`);
+
+  sankey.nodes(graph.nodes).links(graph.links).layout(32);
+
+  // --------------- Nodes ---------------------------------------------------
+  var nodeSel = sankeyg.selectAll(".node").data(graph.nodes);
+  
+  nodeSel.exit().remove();
+  var nodeEnter = nodeSel.enter().append("g");
+  nodeEnter.append("text");
+  var nodeEnterg = nodeEnter.append("g");
+  nodeEnterg.append("rect").append("title");
+  nodeEnterg.append("text");
+
+  nodeSel = nodeEnter.merge(nodeSel)
+    .attr("class", "node")
+    .attr("transform", function(d) {
+      return "translate(" + d.x + "," + d.y + ")"; })
+    .call(
+      d3.drag()
+      .subject(function(d) { return d; })
+      .on("start", function() {
+        this.parentNode.appendChild(this); })
+      .on("drag", dragmove));
+
+  nodeSel.select("rect")
+    .attr("height", function(d) { return d.dy; })
+    .attr("width", sankey.nodeWidth())
+    .style("fill", function(d) {
+      return d.color = "#A9A9A9";}) // color(formatName(d.name).replace(/ .*/, "")); })
+    .style("stroke", function(d) {return "black"; }) //d3.rgb(d.color).darker(2); })
+    .select("title")
+      .text(function(d) {
+        return d.name + "\n" + format(d.value); });
+
+  nodeSel.select("g").select("text")//.filter(function(d) { return d.dy > 12; })
+    .text(function(d) {
+        if (d.dy > 12) {
+          return formatNumber(d.value);
+        } else { return "";} })
+    .attr("y", function(d) { return d.dy / 2; })
+    .attr("dy", ".35em")
+    .attr("x", sankey.nodeWidth()/2)
+    .attr("text-anchor", "middle")
+    .style("font", "14px Helvetica");
+
+  nodeSel.select("text")
+    .attr("x", -6)
+    .attr("y", function(d) { return d.dy / 2; })
+    .attr("dy", ".35em")
+    .attr("text-anchor", "end")
+    .attr("transform", null)
+    .text(function(d) { return formatName(d.name); })
+    .style("font", "14px Helvetica")
+    .filter(function(d) { return d.x < width / 2; })
+    .attr("x", 6 + sankey.nodeWidth())
+    .attr("text-anchor", "start");
+
+  // the function for moving the nodes
+  function dragmove(d) {
+    d3.select(this).attr("transform", "translate(" + (
+      d.x = Math.max(0, Math.min(width - d.dx, d3.event.x)))
+      + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+    sankey.relayout();
+    linkSel.attr("d", path);
+  };
+
+  // --------------- Links ---------------------------------------------------
+  var linkSel = sankeyg.selectAll(".link").data(graph.links)
+  linkSel.exit().remove();
+  var linkEnter = linkSel.enter().append("path")
+  
+  linkSel = linkEnter.merge(linkSel);
+  linkSel.attr("class", "link")
+    .attr("d", path)
+    .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+    .style("stroke", function(d) {  return "#A9A9A9";})
+      // return color(formatName(d.source.name).replace(/ .*/, "")); })
+    .sort(function(a, b) { return b.dy - a.dy; });
+
+  // add the link titles
+  linkEnter.append("title");
+
+  linkSel.text(function(d) {
+    return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
+
+});
+};
+
+var fileNm = "data/data_CO2.json";
+drawSankey(fileNm);
+</script>
+
+</body>
+</html>

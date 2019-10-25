@@ -1,0 +1,83 @@
+<!--
+jdechalendar@stanford.edu
+Data acquisition for the background map is detailed in the Makefile
+-->
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.land {
+  fill: #D3D3D3;
+}
+
+.sea {
+  fill: #A9A9A9;
+  stroke: black;
+  stroke-width:2;
+}
+
+.border {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.interconnect {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 10,10;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.bubble {
+  fill-opacity: .5;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+text.label {
+  text-anchor: middle;
+  font: 14px Helvetica;
+}
+text.label-small {
+  text-anchor: middle;
+  font: 12px Helvetica;
+}
+.legend circle {
+  fill: none;
+  stroke: #777;
+}
+.legend text {
+  fill: #333;
+  font: 14px Helvetica;
+  text-anchor: middle;
+}
+.legend .legtitle {
+  fill: #000;
+  font-weight: bold;
+}
+.graphtitle text {
+  fill: #333;
+  font: 18px Helvetica;
+  text-anchor: middle;
+  font-weight: bold;
+}
+.graphsubtitle text {
+  fill: #666;
+  font: 16px Helvetica;
+  text-anchor: middle;
+  font-weight: bold;
+}
+
+</style>
+<body>
+<!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+<script src="lib/d3/d3.min.js"></script>
+<script src="http://d3js.org/d3-selection-multi.v1.js"></script>
+<!-- <script src="https://unpkg.com/topojson@3"></script> -->
+<script src="lib/topojson/topojson.min.js"></script>
+<script src="./map.js"></script>
