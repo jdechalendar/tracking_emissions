@@ -67,7 +67,7 @@ def parseEPAFile(pathNm, cols=None):
     lbs_to_metr_tons = 0.000453592
 
     # Read data
-    df_tmp = pd.read_csv(pathNm, compression='zip', low_memory=False)
+    df_tmp = pd.read_csv(pathNm, low_memory=False)
 
     # Rename columns
     df_tmp.rename(col_name_map, axis='columns', inplace=True)
