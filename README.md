@@ -3,8 +3,8 @@ This repository contains the code to reproduce the results in the paper: [ADD RE
 
 # Setup
 Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to run on Windows.
-* We provide a `setup.py` file, so you can run `pip install ./` in the repository root to make sure you have the correct python packages installed. Key dependencies include numpy (>=1.17) and pandas (>=0.25).
 * Clone or download this repository to your machine.
+* We provide a `setup.py` file, so you can run `pip install ./` in the repository root to make sure you have the correct python packages installed. Key dependencies include numpy (>=1.17) and pandas (>=0.25).
 * Set the following environment variables by sourcing the provided `.env` file (run `source .env` from the command line at the repository root). Alternatively, you can define the following environement variables (for example by editing your `.bashrc` file):
     * `CODE_PATH`: the path to the folder where you downloaded this repository.
     * `DATA_PATH`: the path where you will save data.
