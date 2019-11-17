@@ -12,8 +12,8 @@ for i in $( curl -l "${url}${year}/" );
 do
     echo $i
     echo "${target}${i}.csv"
-    echo "${target}${i:0:-4}.csv"
-    if [ ! -f "${target}${i:0:-4}.csv" ]; then
+    echo "${target}${i::${#i}-4}.csv"
+    if [ ! -f "${target}${i::${#i}-4}.csv" ]; then
         echo "Adding ${i}...";
         full_url="${url}${year}/${i}"
         echo "Downloading ${full_url}..."

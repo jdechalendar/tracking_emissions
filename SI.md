@@ -1,6 +1,7 @@
 # SI.md
+The repository for the paper is available on Github, at https://github.com/jdechalendar/tracking_emissions
 ## Repository structure
-* Core functionality is implemented in the `src/` folder
+* Core functionality is implemented in the `src/` folder. See README.md at repository root for how to run the code.
    * `load.py` provides classes to load data from different sources - these classes provide accessor functions and checks - no data transformations here.
    * `EBA_n.py` contains cleaning of the EBA data for stage n, `AMPD_n.py` contains cleaning of the AMPD data for stage n, and `SEED.py` generates the consumption emissions dataset.
 * We store data at different stages (raw, after different cleaning stages, cleaned). The loader classes should be able to load the datasets at each stage (after the extraction stage).

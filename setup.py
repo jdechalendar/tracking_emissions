@@ -5,7 +5,7 @@ setup(
     packages=[],
     version='0.0.1',
     python_requires='>=3.5',
-    install_requires=['pandas>=0.25', 'numpy>=1.17', 'matplotlib', 'xlrd',
+    install_requires=['pandas==0.23.4', 'numpy>=1.17', 'matplotlib', 'xlrd',
                       'joblib', 'cmocean'],
     scripts=[]
 )
