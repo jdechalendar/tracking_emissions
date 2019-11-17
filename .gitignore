@@ -1,3 +1,4 @@
+__pycache__/
 figures/.ipynb_checkpoints/
 data/
-fig_output/
+fig_out/
