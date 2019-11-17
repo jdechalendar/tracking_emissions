@@ -5,24 +5,24 @@ This repository contains the code to reproduce the results in the paper: [ADD RE
 Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to run on Windows.
 * Clone or download this repository to your machine.
 * We provide a `setup.py` file, so you can run `pip install ./` in the repository root to make sure you have the correct python packages installed. Key dependencies include numpy (>=1.17) and pandas (>=0.25).
-* Set the following environment variables by sourcing the provided `.env` file (run `source .env` from the command line at the repository root). Alternatively, you can define the following environement variables (for example by editing your `.bashrc` file):
+* This project uses environment variables. They can be set automatically for you using the provided `.env` file (see Usage section), or manually if you prefer to use another location. The environment variables you need are:
     * `CODE_PATH`: the path to the folder where you downloaded this repository.
     * `DATA_PATH`: the path where you will save data.
     * `FIGURE_PATH`: the path where you will create figures.
 
 # Usage
 ## Set environment variables
-* Run `source .env` from the folder this file is in to quickly set the environment variables, or choose appropriate values for them (e.g. using .bashrc).
+* Run `source .env` from the folder this file is in to automatically set the required environment variables.
 
 ## Dataset
 * We provide the files for the final dataset in the `data/analysis` folder. Figures in the paper (and most of the SI Appendix figures) can be regenerated with these files. The `figures` folder contains examples for how to plot and manipulate the dataset.
-* Alternatively, we also provide a Makefile in the `src` folder to regenerate the dataset, as well as intermediate steps. To regenerate the full dataset, you can type the following commands from the `src` folder:
+* Alternatively, you can regenerate the dataset, as well as intermediate steps. We provide a Makefile in the `src` folder to do so. To regenerate the full dataset, you can type the following commands from the `src` folder:
     * `./scrapeAMPD.sh` to download the AMPD data (depending on the speed of your connection, this can take some time).
     * `gunzip ../data/raw/EBA.txt.gz` to uncompress the EBA data.
     * `make all` to regenerate the hourly consumption emissions dataset.
 
 ## Figures
-* We provide a Makefile in the `reports/tracking_emissions` folder to regenerate the figures in the paper and SI Appendix. The following commands can be used:
+* We provide a Makefile in the `reports/tracking_emissions` folder to regenerate the figures in the paper and SI Appendix. The following commands can be used from that folder:
     * `make main`: figures for the main paper.
     * `make si_basic`: figures for the SI Appendix that do not require building the intermediate data steps.
     * `make si`: all figures for the SI Appendix.
