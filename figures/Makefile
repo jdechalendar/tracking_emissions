@@ -57,8 +57,12 @@ $(FIGURE_PATH)/si/back_forth.pdf: SI_back_forth.ipynb $(DATA_FILES)
 
 FILENMS = fig2.pdf fig3.pdf fig4.pdf d3map/data/graph_E_CO2i.json
 MAIN_FIGS = $(FILENMS:%=$(FIGURE_PATH)/main/%)
-SI_FILENMS = daily_profiles/daily_profiles.pdf monthly_sums.pdf AMPD_report.html annualPlot/dummy sankey/data_small.json back_forth.pdf
-SI_FIGS = $(SI_FILENMS:%=$(FIGURE_PATH)/si/%)
+SI_FILENMS_BASIC = daily_profiles/daily_profiles.pdf monthly_sums.pdf annualPlot/dummy sankey/data_small.json back_forth.pdf
+SI_FIGS_ADVANCED = AMPD_report.html
+SI_FIGS_BASIC = $(SI_FILENMS_BASIC:%=$(FIGURE_PATH)/si/%)
 
-.PHONY: all
-all: $(MAIN_FIGS) $(SI_FIGS)
+.PHONY: all main si
+main: $(MAIN_FIGS)
+si_basic: $(SI_FIGS_BASIC)
+si: $(SI_FIGS_ADVANCED) $(SI_FIGS_BASIC)
+all: main si
