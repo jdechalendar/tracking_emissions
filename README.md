@@ -17,7 +17,7 @@ Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to
 ## Dataset
 * We provide the files for the final dataset in the `data/analysis` folder. Figures in the paper (and most of the SI Appendix figures) can be regenerated with these files. The `figures` folder contains examples for how to plot and manipulate the dataset.
 * Alternatively, we also provide a Makefile in the `src` folder to regenerate the dataset, as well as intermediate steps. To regenerate the full dataset, you can type the following commands from the `src` folder:
-    * `./scrapeAMPD.sh` to download the AMPD data.
+    * `./scrapeAMPD.sh` to download the AMPD data (depending on the speed of your connection, this can take some time).
     * `gunzip ../data/raw/EBA.txt.gz` to uncompress the EBA data.
     * `make all` to regenerate the hourly consumption emissions dataset.
 
@@ -31,6 +31,6 @@ Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to
 
 # Data sources
 * Data are stored in the folder pointed by the `DATA_PATH` environment variable. By default, this is the provided `data` folder. There are three datasets:
-    * AMPD: We download from the EPA ftp server. We provide a script in the `src` folder to do this (run `./scrapeAMPD.sh` from the command line from the `src` folder). This should go to `data/raw/AMPD`. Note that the download from AMPD can take some time, depending on the speed of your connection.
+    * AMPD: We download from the EPA ftp server. We provide a script in the `src` folder to do this (run `./scrapeAMPD.sh` from the command line from the `src` folder). This should go to `data/raw/AMPD`.
     * IEA EBA data: [available here](https://www.eia.gov/opendata/bulkfiles.php). The `EBA.txt` file should go to `data/raw/`. We provide a gzipped version of this file.
     * eGRID data: [available here](https://www.epa.gov/energy/emissions-generation-resource-integrated-database-egrid). The EGRID folder should go to `data/raw/`.
