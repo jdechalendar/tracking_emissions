@@ -4,6 +4,7 @@ This repository contains the code to reproduce the results in the paper: [ADD RE
 # Setup
 Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to run on Windows.
 * The code was developped using python 3.5, and may not work with prior versions.
+* Dependencies include numpy (1.17.1), pandas (0.25), xlrd.
 * Clone or download this repository to your machine.
 * Set the following environment variables by sourcing the provided `.env` file (run `source .env` from the command line at the repository root). Alternatively, you can define the following environement variables (for example by editing your `.bashrc` file):
     * `CODE_PATH`: the path to the folder where you downloaded this repository.
