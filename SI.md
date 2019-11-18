@@ -1,5 +1,5 @@
 # SI.md
-The repository for the paper is available on Github, at https://github.com/jdechalendar/tracking_emissions
+The repository for the paper is available on Github, at https://github.com/jdechalendar/tracking_emissions. The latest version of this document (SI.md) will be in that repository.
 ## Repository structure
 * Core functionality is implemented in the `src/` folder. See README.md at repository root for how to run the code.
    * `load.py` provides classes to load data from different sources - these classes provide accessor functions and checks - no data transformations here.
