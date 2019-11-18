@@ -28,6 +28,7 @@ Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to
     * `make si`: all figures for the SI Appendix.
     * `make all`: all figures.
 * Figures can be also generated one by one by running the notebooks.
+* The maps and sankey diagrams can be visualized by opening the html files in the `figures` folder (under `d3_map` and `sankey` respectively).
 
 # Data sources
 * Data are stored in the folder pointed by the `DATA_PATH` environment variable. By default, this is the provided `data` folder. There are three datasets:
