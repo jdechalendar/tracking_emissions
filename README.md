@@ -1,5 +1,5 @@
 # Tracking emissions in the US electricity system
-This repository contains the code to reproduce the results in the paper: [ADD REF on publication].
+This repository contains the code to reproduce the results in the paper: "Tracking emissions in the US electricity system", by Jacques A. de Chalendar, John Taggart and Sally M. Benson. Proceedings of the National Academy of Sciences Dec 2019, 116 (51) 25497-25502; DOI: 10.1073/pnas.1912950116
 
 # Setup
 Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to run on Windows.
@@ -33,5 +33,5 @@ Note: this setup has only been tested on Linux/OSX. Adjustments may be needed to
 # Data sources
 * Data are stored in the folder pointed by the `DATA_PATH` environment variable. By default, this is the provided `data` folder. There are three datasets:
     * AMPD: We download from the EPA ftp server. We provide a script in the `src` folder to do this (run `./scrapeAMPD.sh` from the command line from the `src` folder). This should go to `data/raw/AMPD`.
-    * IEA EBA data: [available here](https://www.eia.gov/opendata/bulkfiles.php). The `EBA.txt` file should go to `data/raw/`. We provide a gzipped version of this file.
+    * EIA EBA data: [available here](https://www.eia.gov/opendata/bulkfiles.php). The `EBA.txt` file should go to `data/raw/`. We provide a gzipped version of this file.
     * eGRID data: [available here](https://www.epa.gov/energy/emissions-generation-resource-integrated-database-egrid). The EGRID folder should go to `data/raw/`.
