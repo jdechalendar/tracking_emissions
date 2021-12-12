@@ -1,3 +1,6 @@
+# [Deprecation warning]
+Work for this project has moved [here](https://github.com/jdechalendar/gridemissions). This repository is kept for archival purposes but is not actively maintained.
+
 # Tracking emissions in the US electricity system
 This repository contains the code to reproduce the results in the paper: "Tracking emissions in the US electricity system", by Jacques A. de Chalendar, John Taggart and Sally M. Benson. Proceedings of the National Academy of Sciences Dec 2019, 116 (51) 25497-25502; DOI: 10.1073/pnas.1912950116
 
